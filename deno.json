@@ -1,0 +1,22 @@
+{
+	"tasks": {
+		"dev": "deno run --unstable-hmr src/main.ts",
+		"fmt": "deno fmt ."
+	},
+	"fmt": {
+		"useTabs": true,
+		"lineWidth": 80,
+		"indentWidth": 2,
+		"semiColons": true,
+		"singleQuote": true,
+		"proseWrap": "preserve",
+		"include": [
+			"src/",
+			"*.ts"
+		],
+		"exclude": [
+			"src/testdata/",
+			"src/fixtures/**/*.ts"
+		]
+	}
+}
