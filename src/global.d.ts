@@ -24,7 +24,7 @@ declare type MapPair<T extends Pair<unknown, unknown>> = {
 	l: Select<T, 'L'>;
 	r: Select<T, 'R'>;
 };
-declare type MapPairs<T extends Pair<unknown, unknown>, K = _PairSide> = {
+declare type MapPairs<T extends Pair<unknown, unknown>, K = PairSide> = {
 	[P in K as `${Lowercase<P extends string ? string : never>}`]: P extends 'L'
 		? Array<T[0]>
 		: P extends 'R' ? Array<T[1]>
@@ -36,10 +36,10 @@ declare type ZipFromPair<P extends Pair<unknown, unknown>> = Zip<
 	Select<P, 'R'>
 >;
 
-declare type _PairSide = Uppercase<'l' | 'r'>;
+declare type PairSide = Uppercase<'l' | 'r'>;
 declare type Select<
 	T extends Pair<unknown, unknown> | Pairs<unknown, unknown>,
-	S extends _PairSide,
+	S extends PairSide,
 > = T extends Pair<infer L, infer R> ? S extends 'L' ? L
 	: R
 	: T extends Pairs<infer L, infer R> ? S extends 'L' ? L
