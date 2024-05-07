@@ -28,23 +28,23 @@ export function unwrap<T>(target: Result<T> | Option<T>): T {
 			return target[1];
 	}
 }
-export function unwrapOr<K extends string, T, R>(
+export function unwrapOr<K extends string, T>(
 	target: Result<T, Errs<K>>,
-	_else: ErrCallback<K, R>,
-): T | R;
-export function unwrapOr<T, R>(
+	_else: ErrCallback<K, T>,
+): T;
+export function unwrapOr<T>(
 	target: Option<T>,
-	_else: VoidCallback<R>,
-): T | R;
-export function unwrapOr<K extends string, T, R>(
+	_else: VoidCallback<T>,
+): T;
+export function unwrapOr<K extends string, T>(
 	target: Result<T, Errs<K>> | Option<T>,
-	_else: ErrCallback<K, R> | VoidCallback<R>,
-): T | R {
+	_else: ErrCallback<K, T> | VoidCallback<T>,
+): T {
 	switch (target[0]) {
 		case 'err':
-			return (_else as ErrCallback<K, R>)(target[1]);
+			return (_else as ErrCallback<K, T>)(target[1]);
 		case 'none':
-			return (_else as VoidCallback<R>)();
+			return (_else as VoidCallback<T>)();
 		default:
 			return target[1];
 	}
